@@ -1,0 +1,52 @@
+#root {
+  padding: 1rem;
+}
+.heading {
+  text-align: center;
+}
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  gap: 2rem;
+  max-width: 1110px;
+  margin: 1rem auto;
+}
+.posts .card {
+  box-shadow: 0px 1px 2px 3px rgba(255, 255, 255, 0.021),
+    1px 2px 3px 5px rgba(255, 255, 255, 0.017);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  flex: 1 1 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.posts .card .username {
+  color: #ffdf5e;
+}
+.posts .not-found {
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #dfd18b;
+}
+
+.spinner {
+  margin: 1rem auto;
+  width: 80px;
+  height: 80px;
+  border: 3px solid #494949;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
