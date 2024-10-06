@@ -2,15 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #f2f2f2;
   background-color: #242424;
 
   font-synthesis: none;
@@ -21,9 +18,44 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #68f2ff;
   text-decoration: inherit;
+  transition: all 0.23s ease-in-out;
 }
 a:hover {
-  color: #535bf2;
+  color: #5fd5e0;
+}
+.form {
+  width: 100%;
+  max-width: 470px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: end;
+}
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.form-group input,
+textarea {
+  padding: 0.8rem;
+  border: 1px solid #ffffff2d;
+  outline: none;
+  color: #f1f1f1;
+  background-color: #3d3d3d;
+  border-radius: 0.4rem;
+  resize: none;
+}
+.form-group input:focus,
+textarea:focus {
+  box-shadow: 0px 1px 2px 2px rgba(255, 255, 255, 0.021),
+    1px 2px 3px 3px rgba(255, 255, 255, 0.017);
+}
+.form-group .warning {
+  font-size: 0.9rem;
+  color: #faff9a;
 }
