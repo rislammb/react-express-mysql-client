@@ -19,7 +19,7 @@ export default function Post() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return (
     <main className="main">
