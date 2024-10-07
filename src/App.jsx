@@ -12,8 +12,8 @@ function App() {
     <BrowserRouter>
       <Navabr />
       <Routes>
-        <Route path="/create-post" element={<CreatePost />} />
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/posts/create" element={<CreatePost />} />
+        <Route path="/posts/:id" element={<Post />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />

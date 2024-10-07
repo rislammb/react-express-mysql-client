@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import instance from "../axios";
+import axios from "../axios";
 
 export default function CreatePost() {
   const {
@@ -10,15 +10,13 @@ export default function CreatePost() {
   } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (values) => {
-    instance
-      .post("/posts", values)
-      .then(() => {
-        return navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const onSubmit = async (values) => {
+    try {
+      await axios.post("/posts", values);
+      return navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

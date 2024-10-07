@@ -1,30 +1,31 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import instance from "../axios";
+import axios from "../axios";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`/posts`);
+      setPosts(res.data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    instance
-      .get("/posts")
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    fetchData();
   }, []);
 
   return (
     <main className="main">
       <h1 className="heading">Posts</h1>
       <div className="text-right">
-        <Link to={"/create-post"} className="btn inline-block">
+        <Link to={"/posts/create"} className="btn inline-block">
           Create Post
         </Link>
       </div>
@@ -34,7 +35,7 @@ export default function Home() {
         ) : posts.length > 0 ? (
           posts.map((post) => (
             <li key={post.id}>
-              <Link to={`/post/${post.id}`} className="card card-link">
+              <Link to={`/posts/${post.id}`} className="card card-link">
                 <div>
                   <h3 className="card-title">{post.title}</h3>
                   <p className="card-badge">@{post.username}</p>
@@ -44,7 +45,9 @@ export default function Home() {
             </li>
           ))
         ) : (
-          <li className="not-found">Posts not found!</li>
+          <li>
+            <h1 className="not-found">Posts not found!</h1>
+          </li>
         )}
       </ul>
     </main>
