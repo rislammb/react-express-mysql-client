@@ -5,6 +5,7 @@ import Navabr from "./components/Navabr";
 import Register from "./pages/Register";
 import CreatePost from "./pages/CreatePost";
 import "./App.css";
+import Post from "./pages/Post";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navabr />
       <Routes>
         <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/post/:id" element={<Post />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />

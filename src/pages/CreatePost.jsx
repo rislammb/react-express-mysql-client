@@ -30,7 +30,7 @@ export default function CreatePost() {
           <input
             {...register("title", { required: true })}
             id="title"
-            placeholder="Title..."
+            placeholder="Enter title"
           />
           {errors.title && <p className="warning">Title is required!</p>}
         </div>
@@ -40,7 +40,7 @@ export default function CreatePost() {
             rows={3}
             {...register("postText", { required: true })}
             id="postText"
-            placeholder="Post text..."
+            placeholder="Enter post text"
           />
           {errors.postText && <p className="warning">Post text is required!</p>}
         </div>
@@ -59,7 +59,7 @@ export default function CreatePost() {
               },
             })}
             id="username"
-            placeholder="username..."
+            placeholder="Enter username"
           />
           {errors.username && (
             <p className="warning">{errors.username.message}</p>

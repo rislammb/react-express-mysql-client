@@ -24,21 +24,23 @@ export default function Home() {
     <main className="main">
       <h1 className="heading">Posts</h1>
       <div className="text-right">
-        <button className="btn">
-          <Link to={"/create-post"}>Create Post</Link>
-        </button>
+        <Link to={"/create-post"} className="btn inline-block">
+          Create Post
+        </Link>
       </div>
       <ul className="posts">
         {loading ? (
           <span className="spinner" />
         ) : posts.length > 0 ? (
           posts.map((post) => (
-            <li key={post.id} className="card">
-              <div>
-                <h3>{post.title}</h3>
-                <p className="username">@{post.username}</p>
-              </div>
-              <p>{post.postText}</p>
+            <li key={post.id}>
+              <Link to={`/post/${post.id}`} className="card card-link">
+                <div>
+                  <h3 className="card-title">{post.title}</h3>
+                  <p className="card-badge">@{post.username}</p>
+                </div>
+                <p>{post.postText}</p>
+              </Link>
             </li>
           ))
         ) : (
