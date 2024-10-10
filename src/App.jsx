@@ -6,14 +6,16 @@ import Register from "./pages/Register";
 import CreatePost from "./pages/CreatePost";
 import "./App.css";
 import Post from "./pages/Post";
+import UserPosts from "./pages/UserPosts";
 
 function App() {
   return (
     <BrowserRouter>
       <Navabr />
       <Routes>
-        <Route path="/posts/create" element={<CreatePost />} />
-        <Route path="/posts/:id" element={<Post />} />
+        <Route path="/post/create" element={<CreatePost />} />
+        <Route path="/post/:id" element={<Post />} />
+        <Route path="/user/:username" element={<UserPosts />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />

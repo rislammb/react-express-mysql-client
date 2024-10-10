@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import axios from "../axios";
 import { useState } from "react";
 
-export default function CreateComment({ postId, fetchData }) {
+export default function CommentForm({ postId, fetchData }) {
   const {
     register,
     handleSubmit,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "../axios";
-import CreateComment from "../components/CreateComment";
+import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 
 export default function Post() {
@@ -12,7 +12,7 @@ export default function Post() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`/posts/${id}`);
+      const res = await axios.get(`/posts/i/${id}`);
       setPost(res.data);
     } catch (err) {
       console.log(err);
@@ -23,7 +23,7 @@ export default function Post() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${id}`);
+      await axios.delete(`/posts/i/${id}`);
       return navigate("/");
     } catch (err) {
       console.log(err);
@@ -49,7 +49,9 @@ export default function Post() {
             </span>
             <div>
               <h1>{post.title}</h1>
-              <h5 className="card-badge">@{post.username}</h5>
+              <Link to={`/user/${post.username}`} className="card-badge">
+                @{post.username}
+              </Link>
             </div>
             <p>{post.postText}</p>
             <p className="text-sm">
@@ -57,7 +59,7 @@ export default function Post() {
             </p>
           </div>
           <div className="card">
-            <CreateComment postId={id} fetchData={fetchData} />
+            <CommentForm postId={id} fetchData={fetchData} />
             <CommentList comments={post?.comments} fetchData={fetchData} />
           </div>
         </>

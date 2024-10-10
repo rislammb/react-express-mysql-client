@@ -56,8 +56,8 @@ export default function CreatePost() {
             {...register("username", {
               required: "Username is required!",
               minLength: {
-                value: 3,
-                message: "Minimum length is 3!",
+                value: 2,
+                message: "Minimum length is 2!",
               },
               maxLength: {
                 value: 15,
