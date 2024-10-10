@@ -29,27 +29,29 @@ export default function Home() {
           Create Post
         </Link>
       </div>
-      <ul className="posts">
-        {loading ? (
-          <span className="spinner" />
-        ) : posts.length > 0 ? (
-          posts.map((post) => (
-            <li key={post.id}>
-              <Link to={`/posts/${post.id}`} className="card card-link">
-                <div>
-                  <h3 className="card-title">{post.title}</h3>
-                  <p className="card-badge">@{post.username}</p>
-                </div>
-                <p>{post.postText}</p>
-              </Link>
+      {loading ? (
+        <span className="spinner" />
+      ) : (
+        <ul className="posts">
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <li key={post.id}>
+                <Link to={`/posts/${post.id}`} className="card card-link">
+                  <div>
+                    <h3 className="card-title">{post.title}</h3>
+                    <p className="card-badge">@{post.username}</p>
+                  </div>
+                  <p>{post.postText}</p>
+                </Link>
+              </li>
+            ))
+          ) : (
+            <li>
+              <h1 className="not-found">Posts not found!</h1>
             </li>
-          ))
-        ) : (
-          <li>
-            <h1 className="not-found">Posts not found!</h1>
-          </li>
-        )}
-      </ul>
+          )}
+        </ul>
+      )}
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "../axios";
+import { useState } from "react";
 
 export default function CreatePost() {
   const {
@@ -9,13 +10,20 @@ export default function CreatePost() {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const onSubmit = async (values) => {
+    setSubmitting(true);
+    setApiError("");
     try {
       await axios.post("/posts", values);
       return navigate("/");
     } catch (err) {
       console.log(err);
+      setApiError(err.message ?? "Something went wrong!");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -63,8 +71,14 @@ export default function CreatePost() {
             <p className="warning">{errors.username.message}</p>
           )}
         </div>
-        <button className="btn btn-primary" type="submit">
+        {apiError && <p className="warning">{apiError}</p>}
+        <button
+          className="btn btn-primary relative flex-c"
+          type="submit"
+          disabled={submitting}
+        >
           Create
+          {submitting && <span className="submittig" />}
         </button>
       </form>
     </main>
