@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "../axios";
+import { axiosPrivate } from "../axios";
 import PostList from "../components/PostList";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`/posts`);
+      const res = await axiosPrivate.get(`/posts`);
       setPosts(res.data);
     } catch (err) {
       console.log(err);

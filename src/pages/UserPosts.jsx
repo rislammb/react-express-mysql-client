@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "../axios";
 import PostList from "../components/PostList";
+import { getUserPosts } from "../services/postService";
 
 export default function UserPosts() {
   const { username } = useParams();
@@ -10,7 +10,7 @@ export default function UserPosts() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`/posts/u/${username}`);
+      const res = await getUserPosts(username);
       setPosts(res.data);
     } catch (err) {
       console.log(err);

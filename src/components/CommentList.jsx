@@ -1,9 +1,9 @@
-import axios from "../axios";
+import { axiosPrivate } from "../axios";
 
 export default function CommentList({ comments, fetchData }) {
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/comments/${id}`);
+      await axiosPrivate.delete(`/comments/${id}`);
       fetchData();
     } catch (err) {
       console.log(err);
@@ -11,22 +11,24 @@ export default function CommentList({ comments, fetchData }) {
   };
 
   return comments?.length > 0 ? (
-    comments.map((comment) => (
-      <div key={comment.id} className="flex-jb">
-        <div>
-          <p>{comment.commentBody}</p>
-          <p className="text-sm">
-            {new Date(comment.createdAt).toLocaleTimeString()}
-          </p>
-        </div>
-        <span
-          onClick={() => handleDelete(comment.id)}
-          className="btn btn-sm btn-delete"
-        >
-          Delete
-        </span>
-      </div>
-    ))
+    <ul className="comments">
+      {comments.map((comment) => (
+        <li key={comment.id} className="flex-jb">
+          <div>
+            <p>{comment.commentBody}</p>
+            <p className="text-sm">
+              {new Date(comment.createdAt).toLocaleTimeString()}
+            </p>
+          </div>
+          <span
+            onClick={() => handleDelete(comment.id)}
+            className="btn btn-sm btn-danger"
+          >
+            Delete
+          </span>
+        </li>
+      ))}
+    </ul>
   ) : (
     <p className="not-found-sm">Comments not found!</p>
   );

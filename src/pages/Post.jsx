@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "../axios";
+import { axiosPrivate } from "../axios";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
+import { deletePost, getPost } from "../services/postService";
 
 export default function Post() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function Post() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`/posts/i/${id}`);
+      const res = await getPost(id);
       setPost(res.data);
     } catch (err) {
       console.log(err);
@@ -23,7 +24,7 @@ export default function Post() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/i/${id}`);
+      await deletePost(id);
       return navigate("/");
     } catch (err) {
       console.log(err);
@@ -43,7 +44,7 @@ export default function Post() {
           <div className="card relative">
             <span
               onClick={handleDelete}
-              className="absolute-r btn btn-sm btn-delete"
+              className="absolute-r btn btn-sm btn-danger"
             >
               Delete
             </span>
