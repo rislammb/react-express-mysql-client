@@ -36,7 +36,7 @@ export default function CommentList({ comments, removeComment }) {
               {username === comment.username && (
                 <span
                   onClick={() => handleDelete(comment.id)}
-                  className="btn btn-sm btn-danger"
+                  className="btn btn-xs btn-danger"
                 >
                   Delete
                 </span>

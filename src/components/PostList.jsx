@@ -18,7 +18,7 @@ export default function PostList({ posts, page }) {
                 )}
               </div>
               <p>{post.postText}</p>
-              <p className="text-sm">
+              <p className="text-sm badge">
                 {new Date(post.createdAt).toLocaleString()}
               </p>
             </Link>

@@ -48,7 +48,7 @@ export default function CommentForm({ postId, addComment }) {
           )}
         </div>
         <button
-          className="btn btn-primary relative flex-c"
+          className="btn btn-primary btn-sm relative flex-c"
           type="submit"
           disabled={submitting}
         >

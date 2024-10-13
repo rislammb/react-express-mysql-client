@@ -30,7 +30,7 @@ export default function UserPosts() {
     <main className="main">
       <div className="flex-jb">
         <h1 className="heading">{username}&apos;s posts</h1>
-        {user && (
+        {user === username && (
           <Link to={"/post/create"} className="btn inline-block">
             Create Post
           </Link>

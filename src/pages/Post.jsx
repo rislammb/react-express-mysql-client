@@ -56,10 +56,7 @@ export default function Post() {
               <h2 className="flex flex-jbs">
                 {post.title}{" "}
                 {username === post.username && (
-                  <span
-                    onClick={handleDelete}
-                    className="btn btn-sm btn-danger"
-                  >
+                  <span onClick={handleDelete} className="btn btn-danger">
                     Delete
                   </span>
                 )}
