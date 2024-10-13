@@ -13,7 +13,7 @@
   color: #68f2ff;
 }
 .active_nav {
-  color: #fafafa;
+  color: #fafafa !important;
 }
 .active_nav:hover {
   color: #fafafa;
