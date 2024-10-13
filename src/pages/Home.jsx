@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { axiosPrivate } from "../axios";
 import PostList from "../components/PostList";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Home() {
+  const { username } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,9 +28,11 @@ export default function Home() {
     <main className="main">
       <div className="flex-jb">
         <h1 className="heading">Posts</h1>
-        <Link to={"/post/create"} className="btn inline-block">
-          Create Post
-        </Link>
+        {username && (
+          <Link to={"/post/create"} className="btn inline-block">
+            Create Post
+          </Link>
+        )}
       </div>
       {loading ? (
         <span className="spinner" />

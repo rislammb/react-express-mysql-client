@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { axiosPrivate } from "../axios";
+import { AuthContext } from "../context/AuthContext";
 import CommentForm from "../components/CommentForm";
 import CommentList from "../components/CommentList";
 import { deletePost, getPost } from "../services/postService";
 
 export default function Post() {
   const { id } = useParams();
+  const { username } = useContext(AuthContext);
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const res = await getPost(id);
       setPost(res.data);
+      setComments(res.data?.comments);
     } catch (err) {
       console.log(err);
     } finally {
@@ -31,9 +35,15 @@ export default function Post() {
     }
   };
 
+  const addComment = (newComment) =>
+    setComments((prev) => [...prev, newComment]);
+
+  const removeComment = (commentId) =>
+    setComments((prev) => prev.filter((comment) => comment.id !== commentId));
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <main className="main responsive-main">
@@ -41,27 +51,31 @@ export default function Post() {
         <span className="spinner" />
       ) : post ? (
         <>
-          <div className="card relative">
-            <span
-              onClick={handleDelete}
-              className="absolute-r btn btn-sm btn-danger"
-            >
-              Delete
-            </span>
+          <div className="card">
             <div>
-              <h1>{post.title}</h1>
+              <h2 className="flex flex-jbs">
+                {post.title}{" "}
+                {username === post.username && (
+                  <span
+                    onClick={handleDelete}
+                    className="btn btn-sm btn-danger"
+                  >
+                    Delete
+                  </span>
+                )}
+              </h2>
               <Link to={`/user/${post.username}`} className="card-badge">
                 @{post.username}
               </Link>
             </div>
             <p>{post.postText}</p>
-            <p className="text-sm">
+            <p className="text-sm badge">
               {new Date(post.createdAt).toLocaleString()}
             </p>
           </div>
           <div className="card">
-            <CommentForm postId={id} fetchData={fetchData} />
-            <CommentList comments={post?.comments} fetchData={fetchData} />
+            {username && <CommentForm postId={id} addComment={addComment} />}
+            <CommentList comments={comments} removeComment={removeComment} />
           </div>
         </>
       ) : (

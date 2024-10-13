@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { createComment } from "../services/commentService";
 
-export default function CommentForm({ postId, fetchData }) {
+export default function CommentForm({ postId, addComment }) {
   const {
     register,
     handleSubmit,
@@ -17,9 +17,9 @@ export default function CommentForm({ postId, fetchData }) {
     setError("");
     values.postId = +postId;
     try {
-      await createComment(values);
+      const res = await createComment(values);
+      addComment(res.data);
       reset();
-      fetchData();
     } catch (err) {
       console.log(err);
       setError(
@@ -31,7 +31,7 @@ export default function CommentForm({ postId, fetchData }) {
   };
 
   return (
-    <div>
+    <div className="w-full">
       <form
         onSubmit={handleSubmit((data) => onSubmit(data))}
         className="form comment-form"
