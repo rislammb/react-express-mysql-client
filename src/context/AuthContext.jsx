@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import { getToken, removeToken, setToken } from "../utils/storage";
-import { getLoggedUser } from "../services/userService";
+import { getLoggedUser } from "../services/authService";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
@@ -22,8 +22,8 @@ const AuthProvider = ({ children }) => {
     const token = getToken();
     if (token) {
       try {
-        const response = await getLoggedUser();
-        setUsername(response.username);
+        const res = await getLoggedUser();
+        setUsername(res.data.username);
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
@@ -44,4 +44,4 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-export { AuthContext, AuthProvider };
+export default AuthProvider;

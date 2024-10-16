@@ -9,7 +9,7 @@ import Post from "./pages/Post";
 import UserPosts from "./pages/UserPosts";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OpenRoute from "./components/OpenRoute";
-import { AuthProvider } from "./context/AuthContext";
+import AuthProvider from "./context/AuthContext";
 
 function App() {
   return (
